@@ -12,12 +12,19 @@
     <div class="container">
       <h1>Gaurav Sharma</h1>
       <p>B.Tech CSE (AIML) | Aspiring Software & AI Developer</p>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
+        <nav class="navbar">
+  <div class="nav-container">
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+
     </div>
   </header>
 
@@ -76,6 +83,13 @@
       <p>&copy; 2025 Gaurav Sharma. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+  function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("show");
+  }
+</script>
+
 
 </body>
 </html>
