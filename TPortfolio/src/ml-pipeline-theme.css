@@ -108,6 +108,18 @@ button:hover, a:hover, .neural-node:hover {
   cursor: none;
 }
 
+/* Particles.js Integration */
+#particles-js {
+  background: transparent !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+}
+
+#particles-js canvas {
+  display: block;
+  z-index: 1 !important;
+}
+
 /* Enhanced Particle System with Movement */
 .css-particles {
   position: fixed;
@@ -317,6 +329,8 @@ button:hover, a:hover, .neural-node:hover {
 .main-title {
   text-align: center;
   margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 10;
 }
 
 .title-content h1 {
@@ -433,17 +447,38 @@ button:hover, a:hover, .neural-node:hover {
 
 /* Interactive Neural Network Visualization */
 .neural-network-section {
-  padding: 0 2rem 4rem 2rem;
+  /* padding: 2rem 4rem 2rem 4rem; */
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 50vh;
   position: relative;
   z-index: 10;
+  /* background: rgba(30, 41, 59, 0.8); */
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(20px);
+  margin: 3rem auto;
+  max-width: 1000px;
+}
+
+.neural-network-section::before {
+  content: 'NEURAL NETWORK';
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .network-container {
-  max-width: 1200px;
+  max-width: 900px;
   width: 100%;
   text-align: center;
 }
@@ -960,6 +995,107 @@ button:hover, a:hover, .neural-node:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Inter', sans-serif;
+}
+
+/* Section Layout Container */
+.sections-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.section-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: stretch;
+}
+
+.section-half {
+  flex: 1;
+  max-width: none;
+  margin: 0;
+}
+
+.section-full {
+  flex: 1;
+  max-width: none;
+  margin: 0;
+}
+
+/* Stacked sections container */
+.section-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Compact sections for stacked layout */
+.section-compact {
+  padding: 1.8rem;
+  margin-bottom: 0;
+}
+
+.section-compact h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+/* Enhanced Projects section styling for full width */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+}
+
+.project:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.1);
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .section-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .sections-container {
+    padding: 1rem;
+  }
+  
+  .scroll-section {
+    padding: 1.5rem;
+  }
+  
+  .section-stacked {
+    gap: 1rem;
+  }
+  
+  .section-compact {
+    padding: 1.5rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .project {
+    padding: 1.5rem;
+  }
 }
 
 /* Skills - Data Flow */

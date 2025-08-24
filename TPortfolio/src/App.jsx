@@ -1,7 +1,45 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import "./ml-pipeline-theme.css";
+import { useState, useEffect , useRef} from 'react'
+import './ml-pipeline-theme.css'
 
-export default function App() {
+function App() {
+  // Initialize particles.js
+  useEffect(() => {
+    const loadParticles = () => {
+      if (window.particlesJS) {
+        window.particlesJS('particles-js', {
+          particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#64ffda' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: '#64ffda', opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 1, random: true, out_mode: 'out' }
+          },
+          interactivity: {
+            detect_on: 'canvas',
+            events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+            modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+          },
+          retina_detect: true
+        });
+      }
+    };
+
+    // Load particles.js script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    script.onload = loadParticles;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup
+      const existingScript = document.querySelector('script[src*="particles.js"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
   const tooltipRef = useRef(null);
   const nodeDetailsRef = useRef(null);
   const nodeContentRef = useRef(null);
@@ -266,6 +304,9 @@ export default function App() {
 
   return (
     <div>
+      {/* Particles.js Interactive Background */}
+      <div id="particles-js" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'auto' }}></div>
+      
       {/* Enhanced Particle System with Movement */}
       <div className="css-particles">
         {Array.from({ length: 40 }, (_, i) => (
@@ -398,184 +439,202 @@ export default function App() {
         <div className="node-content" ref={nodeContentRef}></div>
       </div>
 
-      {/* Scroll Sections - Complete Portfolio */}
-      <section id="about-section" className="scroll-section">
-        <h2>👨‍💻 About Me</h2>
-        <p>
-          I'm a motivated B.Tech Computer Science (AIML) student passionate
-          about artificial intelligence and machine learning. My focus is on
-          developing intelligent solutions that make a real impact in the world
-          through innovative AI technologies.
-        </p>
-        <p>
-          I believe in continuous learning and staying updated with the latest
-          advancements in AI/ML. My journey in computer science has been driven
-          by curiosity and a desire to solve complex problems using data-driven
-          approaches.
-        </p>
-      </section>
+      {/* Scroll Sections - Optimized Layout */}
+      <div className="sections-container">
+        {/* Row 1: (About + Education) + Technical Skills */}
+        <div className="section-row">
+          <div className="section-half section-stacked">
+            <section id="about-section" className="scroll-section section-compact">
+              <h2>👨‍💻 About Me</h2>
+              <p>
+                I'm a motivated B.Tech Computer Science (AIML) student passionate
+                about artificial intelligence and machine learning. My focus is on
+                developing intelligent solutions that make a real impact in the world
+                through innovative AI technologies.
+              </p>
+              <p>
+                I believe in continuous learning and staying updated with the latest
+                advancements in AI/ML. My journey in computer science has been driven
+                by curiosity and a desire to solve complex problems using data-driven
+                approaches.
+              </p>
+            </section>
 
-      <section id="skills-section" className="scroll-section">
-        <h2>🛠️ Technical Skills</h2>
-        <div className="skills-grid">
-          <div className="skill-category">
-            <h3>Programming Languages</h3>
-            <ul className="skills-list">
-              <li>Python</li>
-              <li>JavaScript</li>
-              <li>SQL</li>
-              <li>R</li>
-            </ul>
+            <section id="education-section" className="scroll-section section-compact">
+              <h2>🎓 Education</h2>
+              <div className="education-item">
+                <h3>Bachelor of Technology - Computer Science (AIML)</h3>
+                <p className="institution">Specialization in Artificial Intelligence and Machine Learning</p>
+                <p className="duration">Current Student</p>
+                <p>
+                  Focused curriculum covering advanced topics in AI/ML including deep learning,
+                  neural networks, computer vision, natural language processing, and data science.
+                  Hands-on experience with modern AI frameworks and real-world applications.
+                </p>
+              </div>
+            </section>
           </div>
-          <div className="skill-category">
-            <h3>AI/ML Frameworks</h3>
-            <ul className="skills-list">
-              <li>TensorFlow</li>
-              <li>PyTorch</li>
-              <li>Scikit-learn</li>
-              <li>Keras</li>
-            </ul>
-          </div>
-          <div className="skill-category">
-            <h3>Specializations</h3>
-            <ul className="skills-list">
-              <li>Deep Learning</li>
-              <li>Computer Vision</li>
-              <li>Natural Language Processing</li>
-              <li>Data Analysis</li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
-      <section id="education-section" className="scroll-section">
-        <h2>🎓 Education</h2>
-        <div className="education-item">
-          <h3>Bachelor of Technology - Computer Science (AIML)</h3>
-          <p className="institution">Specialization in Artificial Intelligence and Machine Learning</p>
-          <p className="duration">Current Student</p>
-          <p>
-            Focused curriculum covering advanced topics in AI/ML including deep learning,
-            neural networks, computer vision, natural language processing, and data science.
-            Hands-on experience with modern AI frameworks and real-world applications.
-          </p>
-        </div>
-      </section>
-
-      <section id="projects-section" className="scroll-section">
-        <h2>🚀 Projects</h2>
-        <div className="projects-grid">
-          <div className="project">
-            <h3>Password Manager</h3>
-            <p>
-              Developed a secure password management system with encryption and
-              user authentication. Features include secure storage, password generation,
-              and cross-platform compatibility.
-            </p>
-            <div className="tech-stack">
-              <span className="tech">Python</span>
-              <span className="tech">Encryption</span>
-              <span className="tech">Security</span>
+          <section id="skills-section" className="scroll-section section-half">
+            <h2>🛠️ Technical Skills</h2>
+            <div className="skills-grid">
+              <div className="skill-category">
+                <h3>Programming Languages</h3>
+                <ul className="skills-list">
+                  <li>Python</li>
+                  <li>JavaScript</li>
+                  <li>SQL</li>
+                  <li>R</li>
+                </ul>
+              </div>
+              <div className="skill-category">
+                <h3>AI/ML Frameworks</h3>
+                <ul className="skills-list">
+                  <li>TensorFlow</li>
+                  <li>PyTorch</li>
+                  <li>Scikit-learn</li>
+                  <li>Keras</li>
+                </ul>
+              </div>
+              <div className="skill-category">
+                <h3>Specializations</h3>
+                <ul className="skills-list">
+                  <li>Deep Learning</li>
+                  <li>Computer Vision</li>
+                  <li>Natural Language Processing</li>
+                  <li>Data Analysis</li>
+                </ul>
+              </div>
             </div>
-            <a
-              href="https://github.com/No1Gaurav/Password_Manager"
-              target="_blank"
-              rel="noreferrer"
-              className="project-link"
-            >
-              View on GitHub →
-            </a>
-          </div>
-          <div className="project">
-            <h3>AI/ML Portfolio Website</h3>
-            <p>
-              Interactive portfolio showcasing AI/ML projects with neural network
-              visualization and particle effects. Built with React and modern web technologies.
-            </p>
-            <div className="tech-stack">
-              <span className="tech">React</span>
-              <span className="tech">JavaScript</span>
-              <span className="tech">CSS</span>
+          </section>
+        </div>
+
+        {/* Row 2: Projects (Full Width) */}
+        <div className="section-row">
+          <section id="projects-section" className="scroll-section section-full">
+            <h2>🚀 Projects</h2>
+            <div className="projects-grid">
+              <div className="project">
+                <h3>Password Manager</h3>
+                <p>
+                  Developed a secure password management system with encryption and
+                  user authentication. Features include secure storage, password generation,
+                  and cross-platform compatibility.
+                </p>
+                <div className="tech-stack">
+                  <span className="tech">Python</span>
+                  <span className="tech">Encryption</span>
+                  <span className="tech">Security</span>
+                </div>
+                <a
+                  href="https://github.com/No1Gaurav/Password_Manager"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="project-link"
+                >
+                  View on GitHub →
+                </a>
+              </div>
+              <div className="project">
+                <h3>AI/ML Portfolio Website</h3>
+                <p>
+                  Interactive portfolio showcasing AI/ML projects with neural network
+                  visualization and particle effects. Built with React and modern web technologies.
+                </p>
+                <div className="tech-stack">
+                  <span className="tech">React</span>
+                  <span className="tech">JavaScript</span>
+                  <span className="tech">CSS</span>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
 
-      <section id="experience-section" className="scroll-section">
-        <h2>💼 Experience</h2>
-        <div className="experience-item">
-          <h3>AI/ML Developer</h3>
-          <p className="role-type">Personal Projects & Learning</p>
-          <p>
-            Developing practical AI/ML solutions and exploring cutting-edge technologies
-            in artificial intelligence and deep learning. Focus on building real-world
-            applications that solve meaningful problems.
-          </p>
-          <ul>
-            <li>Hands-on experience with TensorFlow and PyTorch</li>
-            <li>Implementation of computer vision and NLP projects</li>
-            <li>Data preprocessing and model optimization</li>
-            <li>Deployment of ML models in production environments</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="achievements-section" className="scroll-section">
-        <h2>🏆 Achievements</h2>
-        <div className="achievements-grid">
-          <div className="achievement">
-            <h3>Academic Excellence</h3>
-            <p>Consistent performance in Computer Science and AI/ML coursework</p>
-          </div>
-          <div className="achievement">
-            <h3>Technical Projects</h3>
-            <p>Successfully developed and deployed multiple software applications</p>
-          </div>
-          <div className="achievement">
-            <h3>Continuous Learning</h3>
-            <p>Actively pursuing advanced AI/ML concepts and staying updated with industry trends</p>
-          </div>
-          <div className="achievement">
-            <h3>Problem Solving</h3>
-            <p>Strong analytical skills in tackling complex technical challenges</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact-section" className="scroll-section">
-        <h2>📧 Contact</h2>
-        <div className="contact-grid">
-          <div className="contact-item">
-            <h3>Email</h3>
-            <a href="mailto:gsharma190805@gmail.com">gsharma190805@gmail.com</a>
-          </div>
-          <div className="contact-item">
-            <h3>Phone</h3>
-            <p>+91 83685 09312</p>
-          </div>
-          <div className="contact-item">
-            <h3>Social Links</h3>
-            <div className="social-links">
-              <a href="https://github.com/No1Gaurav" target="_blank" rel="noreferrer">
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/gaurav-sharma19"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn
-              </a>
+        {/* Row 3: Experience + Achievements */}
+        <div className="section-row">
+          <section id="experience-section" className="scroll-section section-half">
+            <h2>💼 Experience</h2>
+            <div className="experience-item">
+              <h3>AI/ML Developer</h3>
+              <p className="role-type">Personal Projects & Learning</p>
+              <p>
+                Developing practical AI/ML solutions and exploring cutting-edge technologies
+                in artificial intelligence and deep learning. Focus on building real-world
+                applications that solve meaningful problems.
+              </p>
+              <ul>
+                <li>Hands-on experience with TensorFlow and PyTorch</li>
+                <li>Implementation of computer vision and NLP projects</li>
+                <li>Data preprocessing and model optimization</li>
+                <li>Deployment of ML models in production environments</li>
+              </ul>
             </div>
-          </div>
-          <div className="contact-item">
-            <h3>Resume</h3>
-            <a href="Gaurav_Sharma_Resume.pdf" download className="resume-download">
-              Download Resume
-            </a>
-          </div>
+          </section>
+
+          <section id="achievements-section" className="scroll-section section-half">
+            <h2>🏆 Achievements</h2>
+            <div className="achievements-grid">
+              <div className="achievement">
+                <h3>Academic Excellence</h3>
+                <p>Consistent performance in Computer Science and AI/ML coursework</p>
+              </div>
+              <div className="achievement">
+                <h3>Technical Projects</h3>
+                <p>Successfully developed and deployed multiple software applications</p>
+              </div>
+              <div className="achievement">
+                <h3>Continuous Learning</h3>
+                <p>Actively pursuing advanced AI/ML concepts and staying updated with industry trends</p>
+              </div>
+              <div className="achievement">
+                <h3>Problem Solving</h3>
+                <p>Strong analytical skills in tackling complex technical challenges</p>
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
+
+        {/* Row 4: Contact (Full Width) */}
+        <div className="section-row">
+          <section id="contact-section" className="scroll-section section-full">
+            <h2>📧 Contact</h2>
+            <div className="contact-grid">
+              <div className="contact-item">
+                <h3>Email</h3>
+                <a href="mailto:gsharma190805@gmail.com">gsharma190805@gmail.com</a>
+              </div>
+              <div className="contact-item">
+                <h3>Phone</h3>
+                <p>+91 83685 09312</p>
+              </div>
+              <div className="contact-item">
+                <h3>Social Links</h3>
+                <div className="social-links">
+                  <a href="https://github.com/No1Gaurav" target="_blank" rel="noreferrer">
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/gaurav-sharma19"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+              <div className="contact-item">
+                <h3>Resume</h3>
+                <a href="Gaurav_Sharma_Resume.pdf" download className="resume-download">
+                  Download Resume
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default App
