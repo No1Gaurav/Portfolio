@@ -170,7 +170,7 @@ function App() {
     {
       id: "contact",
       label: "Contact",
-      content: `<h2>Contact</h2><p>Email: <a href="mailto:gsharma190805@gmail.com">gsharma190805@gmail.com</a></p><p>Phone: +91 83685 09312</p><div class='social-links'><a href='https://github.com/No1Gaurav' target='_blank'>GitHub</a> | <a href='https://www.linkedin.com/in/gaurav-sharma19' target='_blank'>LinkedIn</a> | <a href='Gaurav_Sharma_Resume.pdf' download>Download Resume</a></div>`,
+      content: `<h2>Contact</h2><p>Email: <a href="mailto:gsharma190805@gmail.com">gsharma190805@gmail.com</a></p><p>Phone: +91 83685 09312</p><div class='social-links'><a href='https://github.com/No1Gaurav' target='_blank'>GitHub</a> | <a href='https://www.linkedin.com/in/gaurav-sharma19' target='_blank'>LinkedIn</a> | <a href='Gaurav_Sharma_Resume_FINAL.pdf' download>Download Resume</a></div>`,
     },
   ];
 
